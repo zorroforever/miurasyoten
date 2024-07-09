@@ -1,0 +1,18 @@
+{
+  "projectName": "miurasyoten",
+  "serverPort": 1234,
+  "headless": true,
+  "appleLoginURL": "https://business.apple.com/",
+  "appleDeviceURL": "https://business.apple.com/#/main/devices",
+  "abmAccountName": "",
+  "abmAccountPassword": "",
+  "path2Chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "path2ChromeUserData": "D:\\profile",
+  "callBackApiURL": "/abc/callBack",
+  "abmCompanyName": "xxx",
+  "abmAPIClientVersion": "2418B35",
+  "mdmServerId": "61F3D7A562AC4DE396DEC294ABBF1BE4",
+  "apiVersion": true,
+  "responseSuccess": "2",
+  "responseFailed": "3"
+}
