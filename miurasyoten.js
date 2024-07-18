@@ -887,6 +887,11 @@ async function assignDevice(markString, serialNumber){
             const checkResult = await checkActivityProcess(markString, sessionId, cookies, activityId);
             if (checkResult) {
                 await getLFSUStatus(markString, sessionId, cookies);
+            } else {
+                 return {
+                    result: FAILED,
+                    errMessage: `${markString}|something wrong with Apple!!!`
+                };
             }
         }
         return {
@@ -914,13 +919,18 @@ async function checkActivityProcess(markString, sessionId, cookies, activityId){
     try {
         const cap = await checkActivityProgress(markString, sessionId, cookies, activityId);
         if (cap) {
-            if (JSON.parse(cap).data.activity.status === 'IN_PROGRESS') {
+            const status = JSON.parse(cap)?.data?.activity?.status;
+            if (status === 'IN_PROGRESS') {
                 checkCount += 1;
                 if (checkCount >= checkCountMax) {
-                    return true;
+                    logger.error(`${markString}|something wrong with Apple!!!`);
+                    return false;
                 }
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 return await checkActivityProcess(markString, sessionId, cookies, activityId);
+            } 
+            if (status === 'COMPLETED') {
+                return true;
             }
         }
     } catch (e) {
